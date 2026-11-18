@@ -1,5 +1,8 @@
 const container = document.getElementById("container");
 const regenerateButton = document.getElementById("regen-button");
+function getRandomColorNumber() {
+    return Math.floor(Math.random() * 255);
+}
 function generateGrid(count) {
     container.replaceChildren();
     for (let i = 0; i < count; i++) {
@@ -10,18 +13,17 @@ function generateGrid(count) {
             let element = document.createElement("div");
             element.setAttribute("class", "grid-item");
             element.addEventListener("mouseenter", function () {
-                this.classList.add("highlight");
-            })
-            element.addEventListener("mouseleave", function () {
-                this.classList.remove("class", "highlight");
+                this.style.backgroundColor = "rgb(" + getRandomColorNumber()
+                    + "," + getRandomColorNumber() + "," + getRandomColorNumber() + ")";
+                this.style.opacity = (+this.style.opacity) + 0.1;
             })
             line.appendChild(element);
         }
     }
 }
-generateGrid(64);
+generateGrid(12);
 regenerateButton.addEventListener("click", function () {
     const input = prompt("Enter a value to generate grid.");
-    if (!isNaN(+input)&&(+input<=100)&&(input>0))
+    if (!isNaN(+input) && (+input <= 100) && (input > 0))
         generateGrid(+input);
 })
